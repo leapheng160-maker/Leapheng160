@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Anniversary</title>
+    <style>
+        :root {
+            --primary-pink: #ff8fa3;
+            --dark-pink: #ff4d6d;
+            --dark-bg: #1a1a1a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+    
+        .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .heart { position: absolute; color: rgba(255, 143, 163, 0.3); animation: float 6s linear infinite; bottom: -50px; pointer-events: none; }
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px; 
+            box-sizing: border-box;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.8s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-pink);
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px var(--dark-pink);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        h1 { font-family: 'Brush Script MT', cursive; font-size: clamp(2rem, 8vw, 3.5rem); color: var(--primary-pink); margin: 10px 0; }
+        .years-badge { font-size: 1.2rem; color: #ffd700; margin-bottom: 20px; font-weight: bold; }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1 / 1; 
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .photo-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
+
+        .caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        /* Buttons */
+        .main-btn {
+            background: var(--dark-pink);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        .yt-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ff4d4d;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .love-note { font-style: italic; line-height: 1.4; color: #ddd; font-size: 1rem; margin: 15px 0; }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .glass-card {
+                padding: 1.5rem;
+            }
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="mySong">
+        <source src="Ed Sheeran - Perfect.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="bg-hearts" id="bg-hearts"></div>
+
+    <div class="container">
+        <div id="page1" class="glass-card">
+            <img src="Together.jpg" alt="Lover" class="profile-pic">
+            <h1>Happy Anniversary</h1>
+            <p>Happy our Anniversary Click here like a good Girl...</p>
+            <button id="openBtn" class="main-btn">Open Our Story</button>
+        </div>
+
+        <div id="page2" class="glass-card hidden">
+            <h1>Our Memories</h1>
+            <div class="years-badge">✨ 3 Amazing Years ✨</div>
+                
+            <div class="photo-grid"> 
+                <div class="photo-item"><img src="fIRSTDAY.jpg" alt="1"><div class="caption">Day 1</div></div>
+                <div class="photo-item"><img src="OUR.jpg" alt="2"><div class="caption">Our Trip</div></div>
+                <div class="photo-item"><img src="Together.jpg" alt="3"><div class="caption">Favorite Date</div></div>
+                <div class="photo-item"><img src="laugh.jpg" alt="4"><div class="caption">The Laughs</div></div>
+                <div class="photo-item"><img src="hug.jpg" alt="5"><div class="caption">The Hugs</div></div>
+                <div class="photo-item"><img src="Forever.jpg" alt="6"><div class="caption">Forever</div></div>
+                <div class="photo-item"><img src="new.jpg" alt="1"><div class="caption">New Years</div></div>
+                <div class="photo-item"><img src="AH ma.jpg" alt="2"><div class="caption">AH MA</div></div>
+                <div class="photo-item"><img src="koh.jpg" alt="3"><div class="caption">Trov Sne</div></div>
+                <div class="photo-item"><img src="kol 2.jpg" alt="4"><div class="caption">Banch Sne</div></div>
+                <div class="photo-item"><img src="Yummy.jpg" alt="5"><div class="caption">Klean pel write code</div></div>
+                <div class="photo-item"><img src="mab.jpg" alt="6"><div class="caption">Mab Mab</div></div>
+                <div class="photo-item"><img src="anh mad.jpg" alt="2"><div class="caption">:v</div></div>
+                <div class="photo-item"><img src="Kon.jpg" alt="3"><div class="caption">I miss him</div></div>
+                <div class="photo-item"><img src="dog.jpg" alt="4"><div class="caption">yum yum</div></div>
+                <div class="photo-item"><img src="lip.jpg" alt="5"><div class="caption">បែកមាត់</div></div>
+                <div class="photo-item"><img src="halo.jpg" alt="6"><div class="caption">Halloween</div></div>
+                <div class="photo-item"><img src="sun.jpg" alt="6"><div class="caption">SunSet</div></div>
+                <div class="photo-item"><img src="kon2.jpg" alt="5"><div class="caption">អាសរ</div></div>
+                <div class="photo-item"><img src="Fun time.jpg" alt="6"><div class="caption">Cute</div></div>
+                <div class="photo-item"><img src="job.jpg" alt="6"><div class="caption">Our First bz</div></div>
+                <div class="photo-item"><img src="oct.jpg" alt="5"><div class="caption">You make for me </div></div>
+                <div class="photo-item"><img src="cute.jpg" alt="6"><div class="caption">Cute ahh</div></div>
+                <div class="photo-item"><img src="cop.jpg" alt="6"><div class="caption">BAD COP GOOD COP</div></div>
+                 <div class="photo-item"><img src="teach.jpg" alt="5"><div class="caption">You teaching kid in pre dak </div></div>
+                <div class="photo-item"><img src="fastion.jpg" alt="6"><div class="caption">Gang Gang</div></div>
+                <div class="photo-item"><img src="study.jpg" alt="6"><div class="caption">Study Together</div></div>
+                <div class="photo-item"><img src="anni.jpg" alt="5"><div class="caption">Anniversary </div></div>
+                <div class="photo-item"><img src="swag.jpg" alt="6"><div class="caption">sister and sister</div></div>
+                <div class="photo-item"><img src="crazy.jpg" alt="6"><div class="caption"></div>sister and .... who?</div>
+                <div class="photo-item"><img src="first.jpg" alt="5"><div class="caption">Our First Angkor wat date</div></div>
+                <div class="photo-item"><img src="tey.jpg" alt="6"><div class="caption">tey tey ery tey tey</div></div>
+                <div class="photo-item"><img src="holdhand.jpg" alt="6"><div class="caption">Our first hand hold</div></div>
+            </div>
+
+            <p class="love-note">"Thank you for being my everything. im looking for another 100years with you. i love you so"</p>
+
+            <a href="Game.html" class="yt-btn">🧩 Click here here baby </a>
+        </div>
+    </div>
+
+    <script>    
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.getElementById('openBtn');
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            const song = document.getElementById('mySong');
+
+            openBtn.addEventListener('click', () => {
+                song.play().catch(e => console.log("Audio waiting for interaction"));
+                page1.classList.add('hidden');
+                page2.classList.remove('hidden');
+                page2.classList.add('fade-in');
+            });
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+            document.getElementById('bg-hearts').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
